@@ -5,6 +5,6 @@ namespace App.Desafio.Blog.Domain.Interfaces
 {
     public interface ITokenService
     {
-        Task<TokenResponse> GenerateJwtToken(User user);
+        Task<TokenResponse> GenerateJwtTokenAsync(User user);
     }
 }

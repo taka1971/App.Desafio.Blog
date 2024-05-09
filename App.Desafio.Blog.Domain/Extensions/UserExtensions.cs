@@ -7,9 +7,7 @@ namespace App.Desafio.Blog.Domain.Extensions
     {
         public static UserRegisterResponse ToDto(this User user)
         {
-            return new UserRegisterResponse(user.Id, user.Username, user.Email);
+            return new UserRegisterResponse(user.UserId, user.Username, user.Email);
         }
-
-
     }
 }

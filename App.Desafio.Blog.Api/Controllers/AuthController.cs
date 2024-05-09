@@ -50,7 +50,7 @@ namespace App.Desafio.Blog.Api.Controllers
         public async Task<IActionResult> Login([FromQuery] UserLoginRequest request)
         {
             var user = await _userService.AuthenticateAsync(request.Email, request.Password);
-            var token = _tokenService.GenerateJwtToken(user);
+            var token = await _tokenService.GenerateJwtTokenAsync(user);
             var message = $"Success. Generate Token from User {request.Email}.";
 
             return ApiResponse(message, token);
@@ -64,7 +64,7 @@ namespace App.Desafio.Blog.Api.Controllers
         /// <response code="404">User not found. </response>
         /// <response code="500">Internal server error.</response>
         [HttpGet("user")]
-        public async Task<IActionResult> User([FromQuery] string request)
+        public async Task<IActionResult> GetUser([FromQuery] string request)
         {
             var user = await _userService.GetUserByEmailAsync(request);
 

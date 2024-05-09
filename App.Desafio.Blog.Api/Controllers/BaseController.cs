@@ -1,11 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Serilog;
+using System.Security.Claims;
 
 namespace App.Desafio.Blog.Api.Controllers
 {
     public abstract class BaseController : ControllerBase
     {
+        protected Guid UserId
+        {
+            get
+            {
+                var userIdString = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                if (Guid.TryParse(userIdString, out Guid userId))
+                {
+                    return userId;
+                }
+                throw new InvalidOperationException("UserID is not a valid GUID.");
+            }
+        }
+
         protected IActionResult ApiResponse<T>(T result)
         {
             var resultName = result.GetType().Name;
