@@ -99,7 +99,6 @@ builder.Services.AddValidatorsFromAssembly(Assembly.Load("App.Desafio.Blog.Domai
 builder.Services.AddMemoryCache();
 builder.Services.AddHealthChecks();
 
-
 var app = builder.Build();
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
