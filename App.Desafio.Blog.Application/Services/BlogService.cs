@@ -19,19 +19,42 @@ namespace App.Desafio.Blog.Application.Services
             return post.DtoToPost();
         }
 
-        public Task<bool> DeletePostAsync(Guid id, Guid userId)
+        public async Task DeletePostAsync(Guid id, Guid userId)
         {
-            throw new NotImplementedException();
+            var post = await _blogRepository.GetPostByUserIdAndPostId(Guid id, Guid userId);
+            
+            await _blogRepository.DeletePostAsync();
         }
 
-        public Task<IEnumerable<PostResponse>> GetAllPostsAsync()
+        public async Task<IEnumerable<PostResponse>> GetAllPostsAsync()
         {
-            throw new NotImplementedException();
+            var posts = await _blogRepository.GetAllPostsAsync();
+            var response = posts.Select(post => new PostResponse
+            (
+                post.PostId,
+                post.Title,
+                post.Content,
+                post.DateCreated,
+                post.UserId
+            )).ToList();
+
+            return response;
+
         }
 
-        public Task<IEnumerable<PostResponse>> GetAllPostsByUserIdAsync(Guid userId)
+        public async Task<IEnumerable<PostResponse>> GetAllPostsByUserIdAsync(Guid userId)
         {
-            throw new NotImplementedException();
+            var posts = await _blogRepository.GetAllPostsByUserIdAsync(userId);
+            var response = posts.Select(post => new PostResponse
+            (
+                post.PostId,
+                post.Title,
+                post.Content,
+                post.DateCreated,
+                post.UserId
+            )).ToList();
+
+            return response;
         }
 
         public async Task<PostResponse> UpdatePostAsync(UpdatePostRequest request, Guid userId)

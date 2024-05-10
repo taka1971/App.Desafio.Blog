@@ -9,6 +9,6 @@ namespace App.Desafio.Blog.Domain.Interfaces
         Task<IEnumerable<PostResponse>> GetAllPostsByUserIdAsync(Guid userId);
         Task<PostResponse> CreatePostAsync(CreatePostRequest request, Guid userId);
         Task<PostResponse> UpdatePostAsync(UpdatePostRequest request, Guid userId);
-        Task<bool> DeletePostAsync(Guid id, Guid userId);
+        Task DeletePostAsync(Guid id, Guid userId);
     }
 }

@@ -1,4 +1,6 @@
 ﻿using App.Desafio.Blog.Domain.Entities;
+using App.Desafio.Blog.Domain.Enums;
+using App.Desafio.Blog.Domain.Exceptions;
 using App.Desafio.Blog.Domain.Interfaces;
 using App.Desafio.Blog.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
@@ -29,7 +31,10 @@ namespace App.Desafio.Blog.Infra.Data.Repositories
             => await _context.Posts.ToListAsync();
 
         public async Task<IEnumerable<Post>> GetAllPostsByUserIdAsync(Guid userId) 
-            => await _context.Posts.Where(p=> p.UserId == userId).ToListAsync();            
+            => await _context.Posts.Where(p=> p.UserId == userId).ToListAsync();
+
+        public async Task<Post> GetPostByUserIdAndPostId(Guid id, Guid userId)
+         => await _context.Posts.Where(p => p.UserId == userId && p.PostId == id).FirstOrDefaultAsync() ?? throw new DomainException (DomainErrorCode.NotFound, "Post not found.");
 
         public async Task<Post> UpdatePostAsync(Post post)
         {
