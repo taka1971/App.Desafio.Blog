@@ -47,7 +47,7 @@ namespace App.Desafio.Blog.Api.Controllers
         /// <response code="401">User unauthorized. Check if the user exists and if their data has been entered correctly. </response>
         /// <response code="500">Internal server error.</response>
         [HttpGet("login")]
-        public async Task<IActionResult> Login([FromQuery] UserLoginRequest request)
+        public async Task<IActionResult> Login([FromRoute] UserLoginRequest request)
         {
             var user = await _userService.AuthenticateAsync(request.Email, request.Password);
             var token = await _tokenService.GenerateJwtTokenAsync(user);
@@ -64,7 +64,7 @@ namespace App.Desafio.Blog.Api.Controllers
         /// <response code="404">User not found. </response>
         /// <response code="500">Internal server error.</response>
         [HttpGet("user")]
-        public async Task<IActionResult> GetUser([FromQuery] string request)
+        public async Task<IActionResult> GetUser([FromRoute] string request)
         {
             var user = await _userService.GetUserByEmailAsync(request);
 

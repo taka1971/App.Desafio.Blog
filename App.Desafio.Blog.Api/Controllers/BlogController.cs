@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Authorization;
 using App.Desafio.Blog.Domain.Interfaces;
 using App.Desafio.Blog.Domain.Dtos.Requests;
-using System.Security.Claims;
 
 namespace App.Desafio.Blog.Api.Controllers
 {
@@ -37,13 +36,34 @@ namespace App.Desafio.Blog.Api.Controllers
         /// <response code="200">Success register user.</response>
         /// <response code="400">Fail validation.</response>
         /// <response code="500">Internal server error.</response>
+        [HttpGet("user")]
+
+        public async Task<IActionResult> GetAllPostsByUser()
+        {
+            var posts = await _blogService.GetAllPostsByUserIdAsync(UserId);
+            return ApiResponse(posts);
+        }
+
+        /// <summary>
+        /// Get All posts
+        /// </summary>        
+        /// <response code="200">Success register user.</response>
+        /// <response code="400">Fail validation.</response>
+        /// <response code="500">Internal server error.</response>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPost([FromRoute] Guid id)
         {
             var post = await _blogService.GetAllPostsByUserIdAsync(id);
             return ApiResponse(post);
         }
-        
+
+        /// <summary>
+        /// Create new post
+        /// </summary>        
+        /// <response code="200">Success create post.</response>
+        /// <response code="400">Fail validation.</response>
+        /// <response code="500">Internal server error.</response>
+
         [HttpPost]
         [Authorize]  
         public async Task<IActionResult> CreatePost([FromBody] CreatePostRequest request)
@@ -52,7 +72,14 @@ namespace App.Desafio.Blog.Api.Controllers
             var message = "Success. Post created.";
             return ApiResponse(message, post);
         }
-        
+
+        /// <summary>
+        /// Create new post
+        /// </summary>        
+        /// <response code="200">Success create post.</response>
+        /// <response code="400">Fail validation.</response>
+        /// <response code="500">Internal server error.</response>
+        /// 
         [HttpPut]
         [Authorize]  
         public async Task<IActionResult> UpdatePost([FromBody] UpdatePostRequest request)
@@ -61,13 +88,19 @@ namespace App.Desafio.Blog.Api.Controllers
             var message = "Success. Post updated.";
             return ApiResponse(message, post);         
         }
-        
+
+        /// <summary>
+        /// Create new post
+        /// </summary>        
+        /// <response code="200">Success create post.</response>
+        /// <response code="400">Fail validation.</response>
+        /// <response code="500">Internal server error.</response>
         [HttpDelete("{id}")]
         [Authorize]  
         public async Task<IActionResult> DeletePost(Guid id)
         {
-            var success = await _blogService.DeletePostAsync(id, UserId);
-            return success ? NoContent() : NotFound();
+            await _blogService.DeletePostAsync(id, UserId);
+            return NoContent();
         }
     }
 

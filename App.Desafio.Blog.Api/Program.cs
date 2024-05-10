@@ -24,6 +24,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IBlogService, BlogService>();
+builder.Services.AddScoped<IBlogRepository, BlogRepository>();
 
 builder.Services.Configure<AppSettings>(builder.Configuration);
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -95,6 +96,9 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddFluentValidationClientsideAdapters();
 builder.Services.AddValidatorsFromAssembly(Assembly.Load("App.Desafio.Blog.Domain"));
+builder.Services.AddMemoryCache();
+builder.Services.AddHealthChecks();
+
 
 var app = builder.Build();
 

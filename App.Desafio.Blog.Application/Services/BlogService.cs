@@ -21,9 +21,9 @@ namespace App.Desafio.Blog.Application.Services
 
         public async Task DeletePostAsync(Guid id, Guid userId)
         {
-            var post = await _blogRepository.GetPostByUserIdAndPostId(Guid id, Guid userId);
+            var post = await _blogRepository.GetPostByUserIdAndPostId(id, userId);
             
-            await _blogRepository.DeletePostAsync();
+            await _blogRepository.DeletePostAsync(post);
         }
 
         public async Task<IEnumerable<PostResponse>> GetAllPostsAsync()
@@ -59,6 +59,8 @@ namespace App.Desafio.Blog.Application.Services
 
         public async Task<PostResponse> UpdatePostAsync(UpdatePostRequest request, Guid userId)
         {
+            await _blogRepository.GetPostByUserIdAndPostId(request.PostId, userId);
+
             var post = request.DtoToPost(userId);
             var response = await _blogRepository.UpdatePostAsync(post);
             return post.DtoToPost();
