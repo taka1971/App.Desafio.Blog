@@ -28,10 +28,7 @@ namespace App.Desafio.Blog.Infra.Data.Repositories
 
         public async Task<User> GetUserByEmailAsync(string email) 
         {
-            var user = await _context.Users.Where(u => u.Email == email).FirstOrDefaultAsync() ??
-                throw new DomainException(Domain.Enums.DomainErrorCode.NotFound, "User not found.");
-
-            return user;
+            return await _context.Users.Where(u => u.Email == email).FirstOrDefaultAsync();                            
         }               
     }
 }

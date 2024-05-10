@@ -26,12 +26,12 @@ namespace App.Desafio.Blog.Application.Services
 
         public async Task<UserRegisterResponse> CreateUserAsync(UserRegisterRequest request)
         {
-            var existingUser = await _userRepository.GetUserByEmailAsync(request.Email);
-            var msg = string.Empty;
 
-            if (existingUser != null)
+            var existingUser = await _userRepository.GetUserByEmailAsync(request.Email);
+
+            if (existingUser is not null)
             {
-                msg = $"User {request.Email} already exists.";
+                var msg = $"User {request.Email} already exists.";
                 throw new DomainException(DomainErrorCode.ValidationFail, msg);
             }
 
@@ -45,25 +45,26 @@ namespace App.Desafio.Blog.Application.Services
             var user = await _userRepository.CreateUserAsync(newUser);
 
             return user.ToDto();
+
         }
 
         public async Task<User> AuthenticateAsync(string email, string password)
         {
-            var user = await _userRepository.GetUserByEmailAsync(email) ?? throw new DomainException(DomainErrorCode.NotFound, "User not found.");
+            var user = await _userRepository.GetUserByEmailAsync(email);
 
             var result = _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, password);
 
             if (result == PasswordVerificationResult.Failed)
             {
-                throw new DomainException(DomainErrorCode.ValidationFail,"Invalid password.");
+                throw new DomainException(DomainErrorCode.ValidationFail, "Invalid password.");
             }
 
             return user;
-        }        
+        }
 
         public async Task<UserRegisterResponse> GetUserByEmailAsync(string email)
         {
-            var user = await _userRepository.GetUserByEmailAsync(email);
+            var user = await _userRepository.GetUserByEmailAsync(email) ?? throw new DomainException(Domain.Enums.DomainErrorCode.NotFound, "User not found."); ;
 
             return user.ToDto();
         }

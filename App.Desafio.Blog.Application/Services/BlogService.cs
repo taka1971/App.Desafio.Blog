@@ -1,5 +1,7 @@
 ﻿using App.Desafio.Blog.Domain.Dtos.Requests;
 using App.Desafio.Blog.Domain.Dtos.Responses;
+using App.Desafio.Blog.Domain.Enums;
+using App.Desafio.Blog.Domain.Exceptions;
 using App.Desafio.Blog.Domain.Extensions;
 using App.Desafio.Blog.Domain.Interfaces;
 

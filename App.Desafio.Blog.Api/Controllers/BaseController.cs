@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Serilog;
+using System.Collections;
 using System.Security.Claims;
 
 namespace App.Desafio.Blog.Api.Controllers
@@ -22,16 +23,16 @@ namespace App.Desafio.Blog.Api.Controllers
 
         protected IActionResult ApiResponse<T>(T result)
         {
-            var resultName = result.GetType().Name;
+            var resultName = result.GetType().Name;           
 
             if (result is null)
             {
-                Log.Information($"Not Found. {resultName}");
+                Log.Information($"Not found results. {resultName}");
 
                 var notFoundResponse = new
                 {
                     StatusCode = 404,
-                    Message = $"Not Found. {resultName}",
+                    Message = $"Not found results. {resultName}",
                     Path = Request.Path.Value
                 };
                 return NotFound(notFoundResponse);
