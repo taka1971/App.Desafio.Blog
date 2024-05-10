@@ -1,5 +1,6 @@
 using App.Desafio.Blog.Application.Services;
 using App.Desafio.Blog.Crosscutting.Middlewares;
+using App.Desafio.Blog.Crosscutting.Sockets;
 using App.Desafio.Blog.Domain.Entities;
 using App.Desafio.Blog.Domain.Interfaces;
 using App.Desafio.Blog.Infra.Data.Context;
@@ -41,10 +42,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
             ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
-            ValidAudience = "Taka.App.Authentication.Api",
+            ValidAudience = builder.Configuration["JwtSettings:Audience"],
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:Secret"]))
         };
     });
+
+builder.Services.AddAuthorization();
 
 builder.Services.AddInMemoryRateLimiting();
 builder.Services.Configure<IpRateLimitOptions>(builder.Configuration.GetSection("IpRateLimiting"));
@@ -53,6 +56,7 @@ builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>()
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "App Desafio Blog", Version = "v1" });
@@ -98,6 +102,8 @@ builder.Services.AddFluentValidationClientsideAdapters();
 builder.Services.AddValidatorsFromAssembly(Assembly.Load("App.Desafio.Blog.Domain"));
 builder.Services.AddMemoryCache();
 builder.Services.AddHealthChecks();
+builder.Services.AddSignalR();
+builder.Services.AddHostedService<BlogChannelClientService>();
 
 var app = builder.Build();
 
@@ -110,14 +116,20 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseRouting(); 
+app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllers();
 app.UseIpRateLimiting();
 app.MapHealthChecks("/health", new HealthCheckOptions
 {
     Predicate = _ => false
+});
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+    endpoints.MapHub<BlogChannel>("/blogchannel");   
 });
 
 app.Run();

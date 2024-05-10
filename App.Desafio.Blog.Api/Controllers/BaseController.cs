@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Serilog;
-using System.Collections;
 using System.Security.Claims;
 
 namespace App.Desafio.Blog.Api.Controllers

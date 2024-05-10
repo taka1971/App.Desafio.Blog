@@ -93,6 +93,16 @@ namespace App.Desafio.Blog.Domain.Entities
         }
     }
 
+    public class BlogChannelSettings
+    {
+        public string Endpoint { get; set; }
+
+        public BlogChannelSettings()
+        {
+            Endpoint = "";
+        }
+    }
+
     public class AppSettings
     {
         public LoggingSettings Logging { get; set; }
@@ -100,6 +110,7 @@ namespace App.Desafio.Blog.Domain.Entities
         public ConnectionStrings ConnectionStrings { get; set; }
         public HealthCheckSettings HealthCheckSettings { get; set; }
         public IpRateLimitingSettings IpRateLimiting { get; set; }
+        public BlogChannelSettings BlogChannelSettings { get; set; }
 
         public AppSettings()
         {
@@ -108,6 +119,7 @@ namespace App.Desafio.Blog.Domain.Entities
             ConnectionStrings = new ConnectionStrings();
             HealthCheckSettings = new HealthCheckSettings();
             IpRateLimiting = new IpRateLimitingSettings();
+            BlogChannelSettings = new BlogChannelSettings();
         }
     }
 

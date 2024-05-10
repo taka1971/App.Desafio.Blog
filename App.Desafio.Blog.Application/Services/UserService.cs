@@ -50,7 +50,8 @@ namespace App.Desafio.Blog.Application.Services
 
         public async Task<User> AuthenticateAsync(string email, string password)
         {
-            var user = await _userRepository.GetUserByEmailAsync(email);
+            var user = await _userRepository.GetUserByEmailAsync(email)
+                          ?? throw new DomainException(DomainErrorCode.NotFound, "User not found");
 
             var result = _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, password);
 
