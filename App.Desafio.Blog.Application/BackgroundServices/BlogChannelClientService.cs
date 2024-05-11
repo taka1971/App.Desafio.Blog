@@ -6,16 +6,21 @@ using Microsoft.Extensions.Options;
 
 public class BlogChannelClientService : BackgroundService
 {
+    const string urlDefault = "http://web:5000/blogchannel";
     private readonly ILogger<BlogChannelClientService> _logger;
     private readonly AppSettings _appSettings;
     private HubConnection _hubConnection;
 
     public BlogChannelClientService(ILogger<BlogChannelClientService> logger, IOptions<AppSettings> appSettings)
     {
+        var url = _appSettings?.BlogChannelSettings?.Endpoint ?? urlDefault;
+        
         _logger = logger;
         _appSettings = appSettings.Value;
+        
+
         _hubConnection = new HubConnectionBuilder()
-            .WithUrl(_appSettings.BlogChannelSettings.Endpoint) 
+            .WithUrl(url) 
             .Build();
 
         _hubConnection.On<string>("ReceiveMessage", (message) =>

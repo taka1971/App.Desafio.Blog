@@ -1,0 +1,42 @@
+version: '3.8'
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"  # Expondo apenas a porta HTTP
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5000  # Configuração para ouvir apenas em HTTP
+      - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Database=Blogdb;Username=admin;Password=admin123
+      - JwtSettings__Secret=XB3jzEPPwZRo634JM8b-9Kn1gC_LLIg2MyXsw6cMfLs
+      - JwtSettings__Issuer=App.Desafio.Blog.Api
+      - JwtSettings__Audience=App.Desafio.Blog.Api
+      - JwtSettings__ExpiresInMinutes=120
+      - Logging__LogLevel__Default=Information
+      - Logging__LogLevel__Microsoft.AspNetCore=Warning
+      - HealthCheckSettings__Url=http://web:5000/health  # Usando HTTP na porta 5000
+      - IpRateLimiting__EnableEndpointRateLimiting=true
+      - IpRateLimiting__StackBlockedRequests=false
+      - IpRateLimiting__GeneralRules__0__Endpoint=*:/health
+      - IpRateLimiting__GeneralRules__0__Period=1m
+      - IpRateLimiting__GeneralRules__0__Limit=10
+      - BlogChannelSettings__Endpoint=http://web:5000/blogchannel  # Usando HTTP na porta 5000
+      - DATA_PROTECTION_PATH=/root/.aspnet/DataProtection-Keys # Exemplo se precisar passar como var de ambiente
+    volumes:
+      - data_protection_keys:/root/.aspnet/DataProtection-Keys
+    depends_on:
+      - db
+  db:
+    image: postgres:14
+    environment:
+      POSTGRES_DB: Blogdb
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+    ports:
+      - "5432:5432"
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  dbdata:
+  data_protection_keys:
