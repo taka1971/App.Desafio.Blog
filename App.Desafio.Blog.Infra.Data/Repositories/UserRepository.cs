@@ -1,13 +1,7 @@
 ﻿using App.Desafio.Blog.Domain.Entities;
-using App.Desafio.Blog.Domain.Exceptions;
 using App.Desafio.Blog.Domain.Interfaces;
 using App.Desafio.Blog.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace App.Desafio.Blog.Infra.Data.Repositories
 {

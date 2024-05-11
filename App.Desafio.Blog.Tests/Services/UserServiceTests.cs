@@ -8,10 +8,8 @@ using Microsoft.AspNetCore.Identity;
 using App.Desafio.Blog.Domain.Dtos.Requests;
 using App.Desafio.Blog.Domain.Enums;
 
-
 namespace App.Desafio.Blog.Tests.Services
 {
-
     public class UserServiceTests
     {
         private readonly IUserRepository _userRepository = Substitute.For<IUserRepository>();

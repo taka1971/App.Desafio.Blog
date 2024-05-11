@@ -1,6 +1,4 @@
 ﻿using App.Desafio.Blog.Domain.Entities;
-using App.Desafio.Blog.Domain.Enums;
-using App.Desafio.Blog.Domain.Exceptions;
 using App.Desafio.Blog.Domain.Interfaces;
 using App.Desafio.Blog.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
