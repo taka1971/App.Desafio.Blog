@@ -20,6 +20,7 @@ namespace App.Desafio.Blog.Infra.Data.Context
             {
                 entity.HasKey(e => e.UserId);
                 entity.Property(e => e.Username).IsRequired().HasMaxLength(70);
+                entity.Property(e => e.PasswordHash).IsRequired();
                 entity.HasIndex(e => e.Email).IsUnique();
             });
 

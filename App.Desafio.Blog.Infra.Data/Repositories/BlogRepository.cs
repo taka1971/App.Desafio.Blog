@@ -29,12 +29,22 @@ namespace App.Desafio.Blog.Infra.Data.Repositories
             => await _context.Posts.ToListAsync();
 
         public async Task<IEnumerable<Post>> GetAllPostsByUserIdAsync(Guid userId) 
-            => await _context.Posts.Where(p=> p.UserId == userId).ToListAsync();            
+            => await _context.Posts.Where(p=> p.UserId == userId).ToListAsync();
+
+        public async Task<Post> GetPostByUserIdAndPostId(Guid id, Guid userId)
+         => await _context.Posts.FirstOrDefaultAsync(p => p.UserId == userId && p.PostId == id);            
 
         public async Task<Post> UpdatePostAsync(Post post)
         {
-            _context.Posts.Update(post);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Update(post);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                var message = ex.Message;
+            }
             return post;
         }
     }

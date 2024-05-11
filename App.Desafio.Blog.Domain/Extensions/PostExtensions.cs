@@ -7,7 +7,7 @@ namespace App.Desafio.Blog.Domain.Extensions
     {
         public static PostResponse DtoToPost(this Post post)
         {
-            return new PostResponse(post.PostId, post.Title, post.Content, post.DateCreated);
+            return new PostResponse(post.PostId, post.Title, post.Content, post.DateCreated, post.UserId);
         }
     }
 }

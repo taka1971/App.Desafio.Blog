@@ -26,6 +26,7 @@ namespace App.Desafio.Blog.Api.Controllers
         /// <response code="200">Success register user.</response>
         /// <response code="400">Fail validation.</response>
         /// <response code="500">Internal server error.</response>
+        /// 
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] UserRegisterRequest request)
         {
@@ -46,6 +47,7 @@ namespace App.Desafio.Blog.Api.Controllers
         /// <response code="400">Fail validation. </response>
         /// <response code="401">User unauthorized. Check if the user exists and if their data has been entered correctly. </response>
         /// <response code="500">Internal server error.</response>
+        /// 
         [HttpGet("login")]
         public async Task<IActionResult> Login([FromQuery] UserLoginRequest request)
         {
@@ -59,10 +61,11 @@ namespace App.Desafio.Blog.Api.Controllers
         /// <summary>
         /// Get user by email.
         /// </summary>        
-        /// <response code="200">Success query.</response>
+        /// <response code="200">Success get user.</response>
         /// <response code="400">Fail validation. </response>
         /// <response code="404">User not found. </response>
         /// <response code="500">Internal server error.</response>
+        /// 
         [HttpGet("user")]
         public async Task<IActionResult> GetUser([FromQuery] string request)
         {

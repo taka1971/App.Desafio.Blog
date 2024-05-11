@@ -3,12 +3,10 @@ using FluentValidation;
 
 namespace App.Desafio.Blog.Domain.Validations
 {
-    public class UserRegisterRequestValidator : AbstractValidator<UserRegisterRequest>
+    public class UserLoginRequestValidator : AbstractValidator<UserLoginRequest>
     {
-        public UserRegisterRequestValidator()
-        {
-            RuleFor(x => x.Username).NotEmpty().WithMessage("Username is required")
-                .MaximumLength(100).WithMessage("Cannot exceed the maximum length of 100 characters");
+        public UserLoginRequestValidator()
+        {            
             RuleFor(x => x.Email).NotEmpty().EmailAddress().WithMessage("A valid email is required");
             RuleFor(x => x.Password).MinimumLength(6).WithMessage("Password must be at least 6 characters");
         }
