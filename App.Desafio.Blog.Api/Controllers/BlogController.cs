@@ -20,9 +20,10 @@ namespace App.Desafio.Blog.Api.Controllers
         /// <summary>
         /// Get All posts
         /// </summary>        
-        /// <response code="200">Success register user.</response>
+        /// <response code="200">Success get all posts.</response>
         /// <response code="400">Fail validation.</response>
         /// <response code="500">Internal server error.</response>
+        /// 
         [HttpGet]
         public async Task<IActionResult> GetAllPosts()
         {
@@ -33,11 +34,11 @@ namespace App.Desafio.Blog.Api.Controllers
         /// <summary>
         /// Get All posts
         /// </summary>        
-        /// <response code="200">Success register user.</response>
+        /// <response code="200">Success get all posts by user.</response>
         /// <response code="400">Fail validation.</response>
         /// <response code="500">Internal server error.</response>
+        /// 
         [HttpGet("user")]
-
         public async Task<IActionResult> GetAllPostsByUser()
         {
             var posts = await _blogService.GetAllPostsByUserIdAsync(UserId);
@@ -47,9 +48,10 @@ namespace App.Desafio.Blog.Api.Controllers
         /// <summary>
         /// Get All posts
         /// </summary>        
-        /// <response code="200">Success register user.</response>
+        /// <response code="200">Success get post.</response>
         /// <response code="400">Fail validation.</response>
         /// <response code="500">Internal server error.</response>
+        /// 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPost([FromRoute] Guid id)
         {
@@ -63,7 +65,7 @@ namespace App.Desafio.Blog.Api.Controllers
         /// <response code="200">Success create post.</response>
         /// <response code="400">Fail validation.</response>
         /// <response code="500">Internal server error.</response>
-
+        /// 
         [HttpPost]
         [Authorize]  
         public async Task<IActionResult> CreatePost([FromBody] CreatePostRequest request)
@@ -76,7 +78,7 @@ namespace App.Desafio.Blog.Api.Controllers
         /// <summary>
         /// Create new post
         /// </summary>        
-        /// <response code="200">Success create post.</response>
+        /// <response code="200">Success updated post.</response>
         /// <response code="400">Fail validation.</response>
         /// <response code="500">Internal server error.</response>
         /// 
@@ -92,9 +94,10 @@ namespace App.Desafio.Blog.Api.Controllers
         /// <summary>
         /// Create new post
         /// </summary>        
-        /// <response code="200">Success create post.</response>
+        /// <response code="204">Success deleted post.</response>
         /// <response code="400">Fail validation.</response>
         /// <response code="500">Internal server error.</response>
+        /// 
         [HttpDelete("{id}")]
         [Authorize]  
         public async Task<IActionResult> DeletePost(Guid id)
