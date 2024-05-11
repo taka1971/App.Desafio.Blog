@@ -29,6 +29,14 @@ para utilização ( dockerfile e docker-compose.yml)
 4-No prompt do seu sistema ( windows ou unix ) executar o comando
 docker-compose up --build
 
+5-Na pasta \App.Desafio.Blog\App.Desafio.Blog.Infra.Data
+executar as migrations:
+  5.1 - dotnet ef database update
+
+6-Abrir a solution \App.Desafio.Blog\App.Desafio.Blog.sln
+
+7-Executar a aplicação.
+
 
 
 
