@@ -33,7 +33,7 @@ namespace App.Desafio.Blog.Tests.Domain
         [Fact]
         public void Should_have_error_when_Password_is_too_short()
         {
-            var model = new UserLoginRequest("email@example.com", "pass");
+            var model = new UserLoginRequest("email@challenger.com", "pass");
             var result = _validator.TestValidate(model);
             result.ShouldHaveValidationErrorFor(request => request.Password)
                   .WithErrorMessage("Password must be at least 6 characters");
@@ -42,7 +42,7 @@ namespace App.Desafio.Blog.Tests.Domain
         [Fact]
         public void Should_not_have_error_when_request_is_valid()
         {
-            var model = new UserLoginRequest("email@example.com", "password123");
+            var model = new UserLoginRequest("email@challenger.com", "password123");
             var result = _validator.TestValidate(model);
             result.ShouldNotHaveValidationErrorFor(request => request.Email);
             result.ShouldNotHaveValidationErrorFor(request => request.Password);
