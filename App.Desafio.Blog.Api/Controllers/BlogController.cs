@@ -76,7 +76,7 @@ namespace App.Desafio.Blog.Api.Controllers
         }
 
         /// <summary>
-        /// Create new post
+        /// Alter a post
         /// </summary>        
         /// <response code="200">Success updated post.</response>
         /// <response code="400">Fail validation.</response>
@@ -92,7 +92,7 @@ namespace App.Desafio.Blog.Api.Controllers
         }
 
         /// <summary>
-        /// Create new post
+        /// Delete one post
         /// </summary>        
         /// <response code="204">Success deleted post.</response>
         /// <response code="400">Fail validation.</response>

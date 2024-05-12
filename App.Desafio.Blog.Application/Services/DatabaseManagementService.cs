@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Serilog;
 
 namespace App.Desafio.Blog.Application.Services
 {
@@ -14,10 +15,12 @@ namespace App.Desafio.Blog.Application.Services
                 var services = scope.ServiceProvider;
 
                 var context = services.GetRequiredService<AppDbContext>();
-                if (context.Database.GetPendingMigrations().Any())
-                {
+                //if (context.Database.GetPendingMigrations().Any())
+                //{
+                    Log.Information("Execute migration.");
                     context.Database.Migrate();
-                }
+
+                //}
             }
         }
     }
