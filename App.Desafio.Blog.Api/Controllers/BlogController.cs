@@ -38,7 +38,7 @@ namespace App.Desafio.Blog.Api.Controllers
         /// <response code="400">Fail validation.</response>
         /// <response code="500">Internal server error.</response>
         /// 
-        [HttpGet("{id}")]
+        [HttpGet("user/{id}")]
         public async Task<IActionResult> GetPost([FromRoute] Guid id)
         {
             var post = await _blogService.GetAllPostsByUserIdAsync(id);

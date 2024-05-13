@@ -26,10 +26,10 @@ namespace App.Desafio.Blog.Infra.Data.Repositories
         }
 
         public async Task<IEnumerable<Post>> GetAllPostsAsync()  
-            => await _context.Posts.ToListAsync();
+            => await _context.Posts.AsNoTracking().ToListAsync();
 
         public async Task<IEnumerable<Post>> GetAllPostsByUserIdAsync(Guid userId) 
-            => await _context.Posts.Where(p=> p.UserId == userId).ToListAsync();
+            => await _context.Posts.AsNoTracking().Where(p=> p.UserId == userId).ToListAsync();
 
         public async Task<Post> GetPostByUserIdAndPostId(Guid id, Guid userId)
          => await _context.Posts.FirstOrDefaultAsync(p => p.UserId == userId && p.PostId == id);            
