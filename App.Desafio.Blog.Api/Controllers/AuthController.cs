@@ -21,7 +21,7 @@ namespace App.Desafio.Blog.Api.Controllers
         /// Register one new user.
         /// </summary>
         /// <remarks>
-        /// Use this feature to create a new user. All new users will be deliverer.
+        /// Use this feature to create a new user.
         /// </remarks>
         /// <response code="200">Success register user.</response>
         /// <response code="400">Fail validation.</response>

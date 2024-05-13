@@ -27,7 +27,7 @@ namespace App.Desafio.Blog.Application.Services
         public async Task<UserRegisterResponse> CreateUserAsync(UserRegisterRequest request)
         {
 
-            var existingUser = await _userRepository.GetUserByEmailAsync(request.Email);
+                var existingUser = await _userRepository.GetUserByEmailAsync(request.Email);
 
             if (existingUser is not null)
             {

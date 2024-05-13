@@ -107,6 +107,8 @@ builder.Services.AddHostedService<BlogChannelClientService>();
 
 var app = builder.Build();
 
+DatabaseManagementService.MigrationInit(app);
+
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 if (app.Environment.IsDevelopment())
