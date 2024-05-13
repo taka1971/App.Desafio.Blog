@@ -32,7 +32,7 @@ namespace App.Desafio.Blog.Application.Services
         {
             var post = await _blogRepository.GetPostByUserIdAndPostId(id, userId);
 
-            if (post != null) {
+            if (post == null) {
                 throw new DomainException(DomainErrorCode.NotFound, "Post not found."); 
             }
             

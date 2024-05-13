@@ -12,12 +12,11 @@ public class BlogChannelClientService : BackgroundService
     private HubConnection _hubConnection;
 
     public BlogChannelClientService(ILogger<BlogChannelClientService> logger, IOptions<AppSettings> appSettings)
-    {
-        var url = _appSettings?.BlogChannelSettings?.Endpoint ?? urlDefault;
-        
+    {   
         _logger = logger;
         _appSettings = appSettings.Value;
-        
+
+        var url = _appSettings?.BlogChannelSettings?.Endpoint ?? urlDefault;
 
         _hubConnection = new HubConnectionBuilder()
             .WithUrl(url) 

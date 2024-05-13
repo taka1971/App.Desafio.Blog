@@ -29,21 +29,7 @@ namespace App.Desafio.Blog.Api.Controllers
         {
             var posts = await _blogService.GetAllPostsAsync();
             return ApiResponse(posts);
-        }
-
-        /// <summary>
-        /// Get All posts
-        /// </summary>        
-        /// <response code="200">Success get all posts by user.</response>
-        /// <response code="400">Fail validation.</response>
-        /// <response code="500">Internal server error.</response>
-        /// 
-        [HttpGet("user")]
-        public async Task<IActionResult> GetAllPostsByUser()
-        {
-            var posts = await _blogService.GetAllPostsByUserIdAsync(UserId);
-            return ApiResponse(posts);
-        }
+        }        
 
         /// <summary>
         /// Get All posts
