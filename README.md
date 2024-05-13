@@ -2,6 +2,10 @@
 API para realizar a publicação de um BLOG
 ====
 
+Tecnologias aplicadas: NET 8, c#, Entity Framework Core, SignalR
+Aplicado padrões de projeto: Como Clean Code, SOLID, Design Patterns como:
+Singleton, Factory, Repository, Observer.
+
 Resumo
 ===========
 Esta aplicação tem por finalidade realizar 
