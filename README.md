@@ -38,7 +38,7 @@ executar as migrations:
 7-Executar a aplicação.
 
 Para validação referente a notificação de novos posts,
-foi criado um backlogservice utilizando o SignalR
+foi criado um background service utilizando o SignalR
 como um Hub.
 
 Quando uma mensagem nova for adicionada uma mensagem no console 
